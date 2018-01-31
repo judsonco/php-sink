@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y \
     # imagick
     libmagickwand-dev \
     libmagickcore-dev \
+    # mysql command line tool
+    mysql-client \
   && docker-php-ext-install -j$(nproc) \
     mysqli \
     curl \
