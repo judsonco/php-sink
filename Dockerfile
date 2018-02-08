@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
     zip bz2 \
     mbstring \
     mcrypt \
+    exif \
     curl \
     intl \
     xml \
