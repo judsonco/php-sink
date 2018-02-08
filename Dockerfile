@@ -24,6 +24,8 @@ RUN apt-get update && apt-get install -y \
     libmagickcore-dev \
     # mysql command line tool
     mysql-client \
+    # jpegtran
+    libjpeg-turbo-progs \
   && docker-php-ext-install -j$(nproc) \
     mysqli pdo pdo_mysql \
     gmp bcmath \
@@ -43,4 +45,7 @@ RUN apt-get update && apt-get install -y \
   && docker-php-ext-enable \
     memcached \
     igbinary \
-    imagick
+    imagick \
+  && apt-get autoremove -y \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
