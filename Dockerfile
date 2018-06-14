@@ -1,5 +1,7 @@
 FROM php:7.0-fpm
 RUN apt-get update && apt-get install -y \
+    # Git
+    git-core \
     # GD
     libfreetype6-dev \
     libjpeg62-turbo-dev \
