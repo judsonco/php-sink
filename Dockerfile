@@ -41,9 +41,9 @@ RUN apt-get update && apt-get install -y \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
   && pecl install \
-    igbinary-2.0.5 \
-    memcached-3.0.4 \
-    imagick-3.4.3 \
+    igbinary-3.0.1 \
+    memcached-3.1.3 \
+    imagick-3.4.4 \
   && docker-php-ext-enable \
     memcached \
     igbinary \
