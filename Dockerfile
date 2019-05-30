@@ -40,17 +40,23 @@ RUN apt-get update && apt-get install -y \
     xml \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
-  && docker-php-ext-configure igbinary \
-  && docker-php-ext-install -j$(nproc) igbinary \
-  && docker-php-ext-configure memcached --enable-memcached-igbinary \
-  && docker-php-ext-install -j$(nproc) memcached \
+  \
+  && for i in $(seq 1 3); do pecl install -o igbinary && s=0 && break || s=$? && sleep 1; done; (exit $s) \
+  && docker-php-ext-enable igbinary \
+  \
+  && for i in $(seq 1 3); do echo no | pecl install -o --nobuild memcached && s=0 && break || s=$? && sleep 1; done; (exit $s) \
+  && cd "$(pecl config-get temp_dir)/memcached" \
+  && phpize \
+  && ./configure --enable-memcached-igbinary \
+  && make \
+  && make install \
+  && docker-php-ext-enable memcached \
+  && cd - \
+  \
   && pecl install \
-    imagick-3.4.4 \
-  && docker-php-ext-enable \
-    memcached \
-    igbinary \
     imagick \
-    gd \
+  && docker-php-ext-enable \
+    imagick \
   && apt-get autoremove -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
