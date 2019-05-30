@@ -40,14 +40,17 @@ RUN apt-get update && apt-get install -y \
     xml \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
+  && docker-php-ext-configure igbinary \
+  && docker-php-ext-install -j$(nproc) igbinary \
+  && docker-php-ext-configure memcached --enable-memcached-igbinary
+  && docker-php-ext-install -j$(nproc) memcached \
   && pecl install \
-    igbinary-3.0.1 \
-    memcached-3.1.3 \
     imagick-3.4.4 \
   && docker-php-ext-enable \
     memcached \
     igbinary \
     imagick \
+    gd \
   && apt-get autoremove -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
