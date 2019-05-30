@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y \
   && docker-php-ext-install -j$(nproc) gd \
   && docker-php-ext-configure igbinary \
   && docker-php-ext-install -j$(nproc) igbinary \
-  && docker-php-ext-configure memcached --enable-memcached-igbinary
+  && docker-php-ext-configure memcached --enable-memcached-igbinary \
   && docker-php-ext-install -j$(nproc) memcached \
   && pecl install \
     imagick-3.4.4 \
