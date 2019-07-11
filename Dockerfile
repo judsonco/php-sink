@@ -6,13 +6,13 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
-    # Mcrypt
-    libmcrypt-dev \
     # Curl
     libssl-dev \
     libcurl4-openssl-dev \
     # xml
     libxml2-dev \
+    # libzip
+    libzip-dev \
     # bzip2
     libbz2-dev \
     # GMP
@@ -33,7 +33,6 @@ RUN apt-get update && apt-get install -y \
     gmp bcmath \
     zip bz2 \
     mbstring \
-    mcrypt \
     exif \
     curl \
     intl \
